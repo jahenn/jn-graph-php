@@ -27,9 +27,16 @@ class JnGraph
 		$charApi = str_replace("{#labels}",$tmpNams,$charApi);
 		return $charApi;
 	}
-	public function addItem($nombre,$valor){
+	public function addItem($nombre,$valor)
+	{
 		$this->sumItem += floatval($valor);
 		$this->Items[str_replace(" ", "_", $nombre)] = $valor;
+	}
+	function addItemsFromAssoc($assocData,$nameItem,$valueItem)
+	{
+		foreach ($assocData as $value) {
+			$this->addItem($value[$nameItem],$value[$valueItem]);
+		}
 	}
 
 }
