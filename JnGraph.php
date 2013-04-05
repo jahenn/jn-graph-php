@@ -7,13 +7,15 @@ class JnGraph
 	public $Type; //string
 	public $Items = array(); //array
 	public $sumItem=0;
+	public $width = 400;
+	public $height = 200;
 	function __construct()
 	{
 
 	}
 	public function render()
 	{
-		$charApi ="http://chart.googleapis.com/chart?chs=400x200&cht=p&chco=009000,FFFF00,000090&chd=t:{#vals}&chdl={#labels}&chma=5|150&chdlp=l";
+		$charApi ="http://chart.googleapis.com/chart?chs=".$this->width."x".$this->height."&cht=p&chco=009000,FFFF00,000090&chd=t:{#vals}&chdl={#labels}&chma=5|150&chdlp=l";
 		$tmpVals = "";
 		$tmpNams = "";
 		foreach ($this->Items as $key => $value) {
@@ -29,6 +31,10 @@ class JnGraph
 	}
 	public function addItem($nombre,$valor)
 	{
+		if($valor < 1000)
+		{
+			return;
+		}
 		$this->sumItem += floatval($valor);
 		$this->Items[str_replace(" ", "_", $nombre)] = $valor;
 	}
